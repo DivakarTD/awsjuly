@@ -1,0 +1,18 @@
+---
+- hosts: webserver
+  remote_user: test1000
+  become: yes
+ 
+  tasks:
+  - name: creating a file
+    file:
+    path: /home/test1000/
+    state: touch
+    mode: '0644'
+    command: touch testfile creates=/home/test1000/touchtestfile
+  - name: list all files in a direcotry
+    shell: ls -ltr > /home/test1000/abc
+  - name: creating a directory
+    raw: mkdir /home/test1000/testdir creates=/home/test1000/
+  - name: executing a shell script
+    script: ./samplescript.sh

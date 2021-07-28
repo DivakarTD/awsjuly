@@ -1,0 +1,12 @@
+---
+# tasks file for vsftpd
+- name: install vsftpd
+  yum: name=vsftpd state=installed
+- name: copy configuration
+  template: src=vsftpd.conf dest=/etc/vsftpd/vsftpd.conf
+  notify: restart vsftpd
+- name: start vsftpd
+  service: name=vsftpd state=started
+
+
+

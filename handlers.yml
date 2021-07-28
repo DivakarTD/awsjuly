@@ -1,0 +1,28 @@
+---
+- hosts: '{{host}}'
+  remote_user: test1000
+  become: yes
+  vars: 
+       pack: httpd
+  vars_prompt:
+     - prompt: Enter the package name
+       name: pack1
+       private: no
+  vars_files:
+     - abc.yml
+  tasks:
+     - name: Installing webserver {{pack}}
+       yum: name={{pack}} state=installed
+     - name: Installing webserver {{pack1}}
+       yum: name={{pack1}} state=installed
+     - name: Installing webserver {{pack2}}
+       yum: name={{pack2}} state=installed
+     - name: Copy index.htm 
+       copy: src=index.html dest=/var/www/html
+       notify: start httpd
+     - name: starting httpd
+       service: name={{pack}} state=started
+  handlers:
+     - name: start httpd
+       service: name={{pack}} state=restarted
+         

@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+  remote_user: test1000
+  become: yes
+  tasks:
+     - meta: end_play
+       when: ansible_os_family == 'RedHat'
+     - name: Copy index.htm 
+       copy: src=index.html dest=/var/www/html
+     - name: starting httpd
+       service: name=httpd state=started
+                 

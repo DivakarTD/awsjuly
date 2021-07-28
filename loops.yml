@@ -1,0 +1,16 @@
+---
+- hosts: webserver
+  remote_user: test1000
+  become: yes
+  tasks:
+     - name: Installing webserver httpd
+       yum: name={{item}} state=installed
+       with_items:
+            - httpd
+            - curl
+            - telnet
+     - name: Copy index.htm 
+       copy: src=index.html dest=/var/www/html
+     - name: starting httpd
+       service: name=httpd state=started
+                 

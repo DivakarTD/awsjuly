@@ -1,0 +1,8 @@
+---
+- hosts: webserver
+  remote_user: test1000
+  become: yes
+  tasks:
+     - name: Copy index.htm 
+       template: src=abc.j2 dest=/var/www/html/abc
+                 

@@ -1,0 +1,14 @@
+---
+- hosts: webserver
+  remote_user: test1000
+  become: yes
+  tasks:
+     - name: Installing webserver httpd
+       command: yum install httpd -y
+     - name: Copy index.htm 
+       shell: echo "How are you today" > /var/www/html/index.html
+     - name: run the script
+       script: ./abc.sh
+     - name: starting httpd
+       raw: systemctl start httpd
+                 

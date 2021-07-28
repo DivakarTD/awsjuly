@@ -1,0 +1,4 @@
+---
+# defaults file for vsftpd
+anonymous_enable: YES
+local_enable: YES
